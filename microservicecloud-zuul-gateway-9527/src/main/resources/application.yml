@@ -1,0 +1,30 @@
+server: 
+  port: 9527
+ 
+spring: 
+  application:
+    name: microservicecloud-zuul-gateway
+ 
+eureka: 
+  client: 
+    service-url: 
+      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka,http://eureka7003.com:7003/eureka  
+  instance:
+    instance-id: gateway-9527.com
+    prefer-ip-address: true 
+ 
+ 
+zuul: 
+  ignored-services: microservicecloud-dept        #将原来的服务名称microservicecloud-dept排除，只能使用代理的名称mydept
+  #prefix: /ivan         #所有的服务钱都要加前缀
+  #ignored-services: "*"               #将原来所有的服务名称排除，只能使用代理的名称
+  routes: 
+    mydept.serviceId: microservicecloud-dept
+    mydept.path: /mydept/**
+ 
+info:
+  app.name: ivan-microcloud
+  company.name: www.ivan.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
+
